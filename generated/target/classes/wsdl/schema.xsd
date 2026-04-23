@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="http://com.example.petstore/ws"
-           xmlns:tns="http://com.example.petstore/ws"
+           targetNamespace="http://com.generated.api/ws"
+           xmlns:tns="http://com.generated.api/ws"
            elementFormDefault="qualified">
 
     <xs:element name="ListPetsRequest">

@@ -1,0 +1,19 @@
+package com.generated.api.soap;
+
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import com.generated.api.model.Pet;
+
+@XmlRootElement(namespace = "http://com.generated.api/ws/pets")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class CreatePetSoapResponse {
+
+    private boolean success;
+    private Pet result;
+    public Pet getResult() { return result; }
+    public void setResult(Pet result) { this.result = result; }
+
+    public boolean isSuccess() { return success; }
+    public void setSuccess(boolean success) { this.success = success; }
+}

@@ -112,9 +112,7 @@ public class ApplicationClassGenerator {
     }
 
     private String generateProperties(OpenApiSpec spec) {
-        String base = spec.getBaseUrl() != null ? spec.getBaseUrl() : "";
         return "server.port=8080\n" +
-               (base.isBlank() ? "" : "server.servlet.context-path=" + base + "\n") +
                "spring.mvc.throw-exception-if-no-handler-found=true\n" +
                "spring.web.resources.add-mappings=false\n" +
                "spring.jackson.mapper.accept-case-insensitive-enums=true\n";
