@@ -643,6 +643,23 @@ curl -s -X PUT http://localhost:8080/pets/1 \
 curl -s -X DELETE http://localhost:8080/pets/1
 ```
 
+**Live terminal output:**
+
+```
+$ curl -s http://localhost:8080/pets
+{"statusCode":200,"status":"success","message":"List all pets","data":[],"errors":[],"timestamp":"2026-04-23T23:40:08.942621+05:30"}
+
+$ curl -s -X POST http://localhost:8080/pets \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"Buddy","species":"Dog","breed":"Golden Retriever","status":"AVAILABLE","dateOfBirth":"2021-06-15"}'
+{"statusCode":201,"status":"success","message":"Create a new pet","data":{"id":1,"name":"Buddy","species":"Dog","breed":"Golden Retriever","status":"AVAILABLE","dateOfBirth":"2021-06-15","ownerId":null,"tags":null},"errors":[],"timestamp":"2026-04-23T23:40:12.847255+05:30"}
+
+$ curl -s http://localhost:8080/pets
+{"statusCode":200,"status":"success","message":"List all pets","data":[{"id":1,"name":"Buddy","species":"Dog","breed":"Golden Retriever","status":"AVAILABLE","dateOfBirth":"2021-06-15","ownerId":null,"tags":null}],"errors":[],"timestamp":"2026-04-23T23:40:15.522969+05:30"}
+```
+
+---
+
 Generated files from `example/petstore.yaml`:
 
 ```
