@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://com.generated.api/ws"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://com.generated.api/ws"
+             name="OwnersService">
+
+    <types>
+        <xsd:schema targetNamespace="http://com.generated.api/ws">
+            <xsd:import namespace="http://com.generated.api/ws" schemaLocation="schema.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <message name="ListOwnersRequest">
+        <part name="parameters" element="tns:ListOwnersRequest"/>
+    </message>
+    <message name="ListOwnersResponse">
+        <part name="parameters" element="tns:ListOwnersResponse"/>
+    </message>
+    <message name="CreateOwnerRequest">
+        <part name="parameters" element="tns:CreateOwnerRequest"/>
+    </message>
+    <message name="CreateOwnerResponse">
+        <part name="parameters" element="tns:CreateOwnerResponse"/>
+    </message>
+    <message name="GetOwnerByIdRequest">
+        <part name="parameters" element="tns:GetOwnerByIdRequest"/>
+    </message>
+    <message name="GetOwnerByIdResponse">
+        <part name="parameters" element="tns:GetOwnerByIdResponse"/>
+    </message>
+
+    <portType name="OwnersPort">
+        <operation name="listOwners">
+            <input message="tns:ListOwnersRequest"/>
+            <output message="tns:ListOwnersResponse"/>
+        </operation>
+        <operation name="createOwner">
+            <input message="tns:CreateOwnerRequest"/>
+            <output message="tns:CreateOwnerResponse"/>
+        </operation>
+        <operation name="getOwnerById">
+            <input message="tns:GetOwnerByIdRequest"/>
+            <output message="tns:GetOwnerByIdResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="OwnersPortBinding" type="tns:OwnersPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="listOwners">
+            <soap:operation soapAction="http://com.generated.api/ws/listOwners"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="createOwner">
+            <soap:operation soapAction="http://com.generated.api/ws/createOwner"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="getOwnerById">
+            <soap:operation soapAction="http://com.generated.api/ws/getOwnerById"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+    </binding>
+
+    <service name="OwnersService">
+        <port name="OwnersPortPort" binding="tns:OwnersPortBinding">
+            <soap:address location="http://localhost:8080/ws/owners"/>
+        </port>
+    </service>
+
+</definitions>

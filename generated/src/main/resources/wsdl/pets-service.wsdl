@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://com.generated.api/ws"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             targetNamespace="http://com.generated.api/ws"
+             name="PetsService">
+
+    <types>
+        <xsd:schema targetNamespace="http://com.generated.api/ws">
+            <xsd:import namespace="http://com.generated.api/ws" schemaLocation="schema.xsd"/>
+        </xsd:schema>
+    </types>
+
+    <message name="ListPetsRequest">
+        <part name="parameters" element="tns:ListPetsRequest"/>
+    </message>
+    <message name="ListPetsResponse">
+        <part name="parameters" element="tns:ListPetsResponse"/>
+    </message>
+    <message name="CreatePetRequest">
+        <part name="parameters" element="tns:CreatePetRequest"/>
+    </message>
+    <message name="CreatePetResponse">
+        <part name="parameters" element="tns:CreatePetResponse"/>
+    </message>
+    <message name="GetPetByIdRequest">
+        <part name="parameters" element="tns:GetPetByIdRequest"/>
+    </message>
+    <message name="GetPetByIdResponse">
+        <part name="parameters" element="tns:GetPetByIdResponse"/>
+    </message>
+    <message name="UpdatePetRequest">
+        <part name="parameters" element="tns:UpdatePetRequest"/>
+    </message>
+    <message name="UpdatePetResponse">
+        <part name="parameters" element="tns:UpdatePetResponse"/>
+    </message>
+    <message name="DeletePetRequest">
+        <part name="parameters" element="tns:DeletePetRequest"/>
+    </message>
+    <message name="DeletePetResponse">
+        <part name="parameters" element="tns:DeletePetResponse"/>
+    </message>
+
+    <portType name="PetsPort">
+        <operation name="listPets">
+            <input message="tns:ListPetsRequest"/>
+            <output message="tns:ListPetsResponse"/>
+        </operation>
+        <operation name="createPet">
+            <input message="tns:CreatePetRequest"/>
+            <output message="tns:CreatePetResponse"/>
+        </operation>
+        <operation name="getPetById">
+            <input message="tns:GetPetByIdRequest"/>
+            <output message="tns:GetPetByIdResponse"/>
+        </operation>
+        <operation name="updatePet">
+            <input message="tns:UpdatePetRequest"/>
+            <output message="tns:UpdatePetResponse"/>
+        </operation>
+        <operation name="deletePet">
+            <input message="tns:DeletePetRequest"/>
+            <output message="tns:DeletePetResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="PetsPortBinding" type="tns:PetsPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="listPets">
+            <soap:operation soapAction="http://com.generated.api/ws/listPets"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="createPet">
+            <soap:operation soapAction="http://com.generated.api/ws/createPet"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="getPetById">
+            <soap:operation soapAction="http://com.generated.api/ws/getPetById"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="updatePet">
+            <soap:operation soapAction="http://com.generated.api/ws/updatePet"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+        <operation name="deletePet">
+            <soap:operation soapAction="http://com.generated.api/ws/deletePet"/>
+            <input><soap:body use="literal"/></input>
+            <output><soap:body use="literal"/></output>
+        </operation>
+    </binding>
+
+    <service name="PetsService">
+        <port name="PetsPortPort" binding="tns:PetsPortBinding">
+            <soap:address location="http://localhost:8080/ws/pets"/>
+        </port>
+    </service>
+
+</definitions>

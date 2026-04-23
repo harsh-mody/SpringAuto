@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://com.generated.api/ws"
+           targetNamespace="http://com.generated.api/ws"
+           elementFormDefault="qualified">
+
+    <xs:element name="ListPetsRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="status" type="xs:string" minOccurs="0"/>
+            <xs:element name="page" type="xs:string" minOccurs="0"/>
+            <xs:element name="size" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="ListPetsResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="success" type="xs:boolean"/>
+            <xs:element name="result" type="xs:anyType" minOccurs="0"/>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="CreatePetRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="body" type="xs:anyType" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="CreatePetResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="success" type="xs:boolean"/>
+            <xs:element name="result" type="xs:anyType" minOccurs="0"/>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetPetByIdRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="petId" type="xs:string" minOccurs="1"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetPetByIdResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="success" type="xs:boolean"/>
+            <xs:element name="result" type="xs:anyType" minOccurs="0"/>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="UpdatePetRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="petId" type="xs:string" minOccurs="1"/>
+            <xs:element name="body" type="xs:anyType" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="UpdatePetResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="success" type="xs:boolean"/>
+            <xs:element name="result" type="xs:anyType" minOccurs="0"/>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="DeletePetRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="petId" type="xs:string" minOccurs="1"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="DeletePetResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="success" type="xs:boolean"/>
+            <xs:element name="result" type="xs:anyType" minOccurs="0"/>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="ListOwnersRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="lastName" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="ListOwnersResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="success" type="xs:boolean"/>
+            <xs:element name="result" type="xs:anyType" minOccurs="0"/>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="CreateOwnerRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="body" type="xs:anyType" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="CreateOwnerResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="success" type="xs:boolean"/>
+            <xs:element name="result" type="xs:anyType" minOccurs="0"/>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetOwnerByIdRequest">
+        <xs:complexType><xs:sequence>
+            <xs:element name="ownerId" type="xs:string" minOccurs="1"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetOwnerByIdResponse">
+        <xs:complexType><xs:sequence>
+            <xs:element name="success" type="xs:boolean"/>
+            <xs:element name="result" type="xs:anyType" minOccurs="0"/>
+            <xs:element name="errorMessage" type="xs:string" minOccurs="0"/>
+        </xs:sequence></xs:complexType>
+    </xs:element>
+
+
+</xs:schema>

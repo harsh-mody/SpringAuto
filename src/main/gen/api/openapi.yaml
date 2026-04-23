@@ -1,0 +1,486 @@
+openapi: 3.0.3
+info:
+  description: A sample REST + SOAP API generated from an OpenAPI spec by SpringAuto
+  title: Pet Store API
+  version: 1.0.0
+servers:
+- url: /api/v1
+tags:
+- description: Pet management operations
+  name: pets
+- description: Owner management operations
+  name: owners
+paths:
+  /pets:
+    get:
+      description: "Returns a paginated list of pets, optionally filtered by status."
+      operationId: listPets
+      parameters:
+      - explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - available
+          - pending
+          - sold
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          default: 0
+          minimum: 0
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: size
+        required: false
+        schema:
+          default: 20
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Pet'
+                type: array
+          description: Successful response
+        "400":
+          description: Invalid filter parameters
+        "429":
+          description: Too many requests
+      summary: List all pets
+      tags:
+      - pets
+      x-accepts:
+      - application/json
+    post:
+      operationId: createPet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePetRequest'
+        description: Pet to create
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+          description: Pet created
+        "400":
+          description: Validation error
+        "409":
+          description: Pet already exists
+      summary: Create a new pet
+      tags:
+      - pets
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /pets/{petId}:
+    delete:
+      operationId: deletePet
+      parameters:
+      - explode: false
+        in: path
+        name: petId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: Pet deleted
+        "404":
+          description: Pet not found
+      summary: Delete a pet
+      tags:
+      - pets
+      x-accepts:
+      - application/json
+    get:
+      operationId: getPetById
+      parameters:
+      - explode: false
+        in: path
+        name: petId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+          description: Pet found
+        "404":
+          description: Pet not found
+      summary: Get a pet by ID
+      tags:
+      - pets
+      x-accepts:
+      - application/json
+    put:
+      operationId: updatePet
+      parameters:
+      - explode: false
+        in: path
+        name: petId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePetRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+          description: Pet updated
+        "400":
+          description: Validation error
+        "404":
+          description: Pet not found
+      summary: Update a pet
+      tags:
+      - pets
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /owners:
+    get:
+      operationId: listOwners
+      parameters:
+      - explode: true
+        in: query
+        name: lastName
+        required: false
+        schema:
+          maxLength: 100
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Owner'
+                type: array
+          description: List of owners
+      summary: List all owners
+      tags:
+      - owners
+      x-accepts:
+      - application/json
+    post:
+      operationId: createOwner
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOwnerRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Owner'
+          description: Owner created
+        "400":
+          description: Validation failed
+      summary: Register a new owner
+      tags:
+      - owners
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /owners/{ownerId}:
+    get:
+      operationId: getOwnerById
+      parameters:
+      - explode: false
+        in: path
+        name: ownerId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Owner'
+          description: Owner found
+        "404":
+          description: Owner not found
+      summary: Get an owner by ID
+      tags:
+      - owners
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    Pet:
+      description: Represents a pet in the store
+      example:
+        species: species
+        name: name
+        dateOfBirth: 2000-01-23
+        id: 0
+        ownerId: 6
+        breed: breed
+        status: available
+        tags:
+        - tags
+        - tags
+        - tags
+        - tags
+        - tags
+      properties:
+        id:
+          description: Unique pet identifier
+          format: int64
+          type: integer
+        name:
+          description: Pet's name
+          maxLength: 100
+          minLength: 1
+          pattern: "^[a-zA-Z0-9 '-]+$"
+          type: string
+        species:
+          description: Animal species
+          maxLength: 50
+          type: string
+        breed:
+          maxLength: 100
+          type: string
+        status:
+          description: Pet availability status
+          enum:
+          - available
+          - pending
+          - sold
+          type: string
+        dateOfBirth:
+          description: Date of birth (YYYY-MM-DD)
+          format: date
+          type: string
+        ownerId:
+          description: ID of the owner (if adopted)
+          format: int64
+          type: integer
+        tags:
+          items:
+            type: string
+          maxItems: 10
+          type: array
+      required:
+      - id
+      - name
+      - status
+      type: object
+    CreatePetRequest:
+      description: Request body for creating a new pet
+      example:
+        species: species
+        name: name
+        dateOfBirth: 2000-01-23
+        ownerId: 0
+        breed: breed
+        status: available
+      properties:
+        name:
+          maxLength: 100
+          minLength: 1
+          pattern: "^[a-zA-Z0-9 '-]+$"
+          type: string
+        species:
+          maxLength: 50
+          minLength: 1
+          type: string
+        breed:
+          maxLength: 100
+          type: string
+        status:
+          enum:
+          - available
+          - pending
+          - sold
+          type: string
+        dateOfBirth:
+          format: date
+          type: string
+        ownerId:
+          format: int64
+          type: integer
+      required:
+      - name
+      - species
+      - status
+      type: object
+    UpdatePetRequest:
+      description: Request body for updating a pet
+      example:
+        species: species
+        name: name
+        ownerId: 0
+        breed: breed
+        status: available
+      properties:
+        name:
+          maxLength: 100
+          minLength: 1
+          type: string
+        species:
+          maxLength: 50
+          type: string
+        breed:
+          maxLength: 100
+          type: string
+        status:
+          enum:
+          - available
+          - pending
+          - sold
+          type: string
+        ownerId:
+          format: int64
+          type: integer
+      type: object
+    Owner:
+      description: A pet owner
+      example:
+        firstName: firstName
+        lastName: lastName
+        address:
+          country: country
+          city: city
+          street: street
+          postalCode: postalCode
+          state: state
+        phone: phone
+        id: 0
+        email: email
+      properties:
+        id:
+          format: int64
+          type: integer
+        firstName:
+          maxLength: 50
+          minLength: 1
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 1
+          type: string
+        email:
+          format: email
+          maxLength: 255
+          pattern: "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"
+          type: string
+        phone:
+          maxLength: 20
+          pattern: "^\\+?[0-9\\s\\-().]{7,20}$"
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+      required:
+      - email
+      - firstName
+      - id
+      - lastName
+      type: object
+    CreateOwnerRequest:
+      example:
+        firstName: firstName
+        lastName: lastName
+        address:
+          country: country
+          city: city
+          street: street
+          postalCode: postalCode
+          state: state
+        phone: phone
+        email: email
+      properties:
+        firstName:
+          maxLength: 50
+          minLength: 1
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 1
+          type: string
+        email:
+          format: email
+          maxLength: 255
+          pattern: "^[a-zA-Z0-9._%+\\-]+@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}$"
+          type: string
+        phone:
+          maxLength: 20
+          pattern: "^\\+?[0-9\\s\\-().]{7,20}$"
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+      required:
+      - email
+      - firstName
+      - lastName
+      type: object
+    Address:
+      description: Physical address
+      example:
+        country: country
+        city: city
+        street: street
+        postalCode: postalCode
+        state: state
+      properties:
+        street:
+          maxLength: 200
+          type: string
+        city:
+          maxLength: 100
+          type: string
+        state:
+          maxLength: 50
+          type: string
+        postalCode:
+          maxLength: 20
+          pattern: "^[A-Z0-9 \\-]{3,10}$"
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          maxLength: 2
+          pattern: "^[A-Z]{2}$"
+          type: string
+      type: object
+
