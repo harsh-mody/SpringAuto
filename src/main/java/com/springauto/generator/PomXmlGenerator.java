@@ -1,0 +1,85 @@
+package com.springauto.generator;
+
+import com.springauto.model.OpenApiSpec;
+
+public class PomXmlGenerator {
+
+    public String generate(OpenApiSpec spec, String basePackage) {
+        String artifactId = basePackage.replace('.', '-');
+        String version = spec.getVersion() != null ? spec.getVersion() : "1.0.0";
+
+        return """
+                <?xml version="1.0" encoding="UTF-8"?>
+                <project xmlns="http://maven.apache.org/POM/4.0.0"
+                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+                    <modelVersion>4.0.0</modelVersion>
+
+                    <parent>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-parent</artifactId>
+                        <version>3.2.0</version>
+                    </parent>
+
+                    <groupId>%s</groupId>
+                    <artifactId>%s</artifactId>
+                    <version>%s</version>
+                    <packaging>jar</packaging>
+
+                    <properties>
+                        <java.version>17</java.version>
+                        <maven.compiler.source>17</maven.compiler.source>
+                        <maven.compiler.target>17</maven.compiler.target>
+                        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+                    </properties>
+
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-web</artifactId>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-validation</artifactId>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.springframework.ws</groupId>
+                            <artifactId>spring-ws-core</artifactId>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-actuator</artifactId>
+                        </dependency>
+                        <dependency>
+                            <groupId>org.springdoc</groupId>
+                            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                            <version>2.3.0</version>
+                        </dependency>
+                        <dependency>
+                            <groupId>jakarta.xml.bind</groupId>
+                            <artifactId>jakarta.xml.bind-api</artifactId>
+                        </dependency>
+                        <dependency>
+                            <groupId>com.sun.xml.bind</groupId>
+                            <artifactId>jaxb-impl</artifactId>
+                            <version>4.0.4</version>
+                            <scope>runtime</scope>
+                        </dependency>
+                        <dependency>
+                            <groupId>wsdl4j</groupId>
+                            <artifactId>wsdl4j</artifactId>
+                        </dependency>
+                    </dependencies>
+
+                    <build>
+                        <plugins>
+                            <plugin>
+                                <groupId>org.springframework.boot</groupId>
+                                <artifactId>spring-boot-maven-plugin</artifactId>
+                            </plugin>
+                        </plugins>
+                    </build>
+                </project>
+                """.formatted(basePackage, artifactId, version);
+    }
+}

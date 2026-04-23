@@ -1,74 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
-             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-             xmlns:tns="http://com.generated.api/ws"
-             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-             targetNamespace="http://com.generated.api/ws"
-             name="OwnersService">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://com.example.petstore/ws/owners"
+                  targetNamespace="http://com.example.petstore/ws/owners"
+                  name="OwnersService">
 
-    <types>
-        <xsd:schema targetNamespace="http://com.generated.api/ws">
-            <xsd:import namespace="http://com.generated.api/ws" schemaLocation="schema.xsd"/>
-        </xsd:schema>
-    </types>
+    <wsdl:types><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <!-- types defined in schema.xsd -->
+    </xs:schema></wsdl:types>
 
-    <message name="ListOwnersRequest">
-        <part name="parameters" element="tns:ListOwnersRequest"/>
-    </message>
-    <message name="ListOwnersResponse">
-        <part name="parameters" element="tns:ListOwnersResponse"/>
-    </message>
-    <message name="CreateOwnerRequest">
-        <part name="parameters" element="tns:CreateOwnerRequest"/>
-    </message>
-    <message name="CreateOwnerResponse">
-        <part name="parameters" element="tns:CreateOwnerResponse"/>
-    </message>
-    <message name="GetOwnerByIdRequest">
-        <part name="parameters" element="tns:GetOwnerByIdRequest"/>
-    </message>
-    <message name="GetOwnerByIdResponse">
-        <part name="parameters" element="tns:GetOwnerByIdResponse"/>
-    </message>
+    <wsdl:message name="ListOwnersRequest">
+        <wsdl:part name="parameters" element="tns:ListOwnersRequest"/>
+    </wsdl:message>
+    <wsdl:message name="ListOwnersResponse">
+        <wsdl:part name="parameters" element="tns:ListOwnersResponse"/>
+    </wsdl:message>
 
-    <portType name="OwnersPort">
-        <operation name="listOwners">
-            <input message="tns:ListOwnersRequest"/>
-            <output message="tns:ListOwnersResponse"/>
-        </operation>
-        <operation name="createOwner">
-            <input message="tns:CreateOwnerRequest"/>
-            <output message="tns:CreateOwnerResponse"/>
-        </operation>
-        <operation name="getOwnerById">
-            <input message="tns:GetOwnerByIdRequest"/>
-            <output message="tns:GetOwnerByIdResponse"/>
-        </operation>
-    </portType>
+    <wsdl:message name="CreateOwnerRequest">
+        <wsdl:part name="parameters" element="tns:CreateOwnerRequest"/>
+    </wsdl:message>
+    <wsdl:message name="CreateOwnerResponse">
+        <wsdl:part name="parameters" element="tns:CreateOwnerResponse"/>
+    </wsdl:message>
 
-    <binding name="OwnersPortBinding" type="tns:OwnersPort">
+    <wsdl:message name="GetOwnerByIdRequest">
+        <wsdl:part name="parameters" element="tns:GetOwnerByIdRequest"/>
+    </wsdl:message>
+    <wsdl:message name="GetOwnerByIdResponse">
+        <wsdl:part name="parameters" element="tns:GetOwnerByIdResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="OwnersServicePort">
+        <wsdl:operation name="ListOwners">
+            <wsdl:input message="tns:ListOwnersRequest"/>
+            <wsdl:output message="tns:ListOwnersResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreateOwner">
+            <wsdl:input message="tns:CreateOwnerRequest"/>
+            <wsdl:output message="tns:CreateOwnerResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetOwnerById">
+            <wsdl:input message="tns:GetOwnerByIdRequest"/>
+            <wsdl:output message="tns:GetOwnerByIdResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="OwnersServiceBinding" type="tns:OwnersServicePort">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <operation name="listOwners">
-            <soap:operation soapAction="http://com.generated.api/ws/listOwners"/>
-            <input><soap:body use="literal"/></input>
-            <output><soap:body use="literal"/></output>
-        </operation>
-        <operation name="createOwner">
-            <soap:operation soapAction="http://com.generated.api/ws/createOwner"/>
-            <input><soap:body use="literal"/></input>
-            <output><soap:body use="literal"/></output>
-        </operation>
-        <operation name="getOwnerById">
-            <soap:operation soapAction="http://com.generated.api/ws/getOwnerById"/>
-            <input><soap:body use="literal"/></input>
-            <output><soap:body use="literal"/></output>
-        </operation>
-    </binding>
+        <wsdl:operation name="ListOwners">
+            <soap:operation soapAction="http://com.example.petstore/ws/owners/ListOwners"/>
+            <wsdl:input><soap:body use="literal"/></wsdl:input>
+            <wsdl:output><soap:body use="literal"/></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreateOwner">
+            <soap:operation soapAction="http://com.example.petstore/ws/owners/CreateOwner"/>
+            <wsdl:input><soap:body use="literal"/></wsdl:input>
+            <wsdl:output><soap:body use="literal"/></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetOwnerById">
+            <soap:operation soapAction="http://com.example.petstore/ws/owners/GetOwnerById"/>
+            <wsdl:input><soap:body use="literal"/></wsdl:input>
+            <wsdl:output><soap:body use="literal"/></wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
 
-    <service name="OwnersService">
-        <port name="OwnersPortPort" binding="tns:OwnersPortBinding">
-            <soap:address location="http://localhost:8080/ws/owners"/>
-        </port>
-    </service>
+    <wsdl:service name="OwnersService">
+        <wsdl:port name="OwnersServicePort" binding="tns:OwnersServiceBinding">
+            <soap:address location="http://localhost:8080/ws"/>
+        </wsdl:port>
+    </wsdl:service>
 
-</definitions>
+</wsdl:definitions>

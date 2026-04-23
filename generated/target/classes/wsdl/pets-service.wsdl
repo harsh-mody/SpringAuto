@@ -1,104 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
-             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-             xmlns:tns="http://com.generated.api/ws"
-             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-             targetNamespace="http://com.generated.api/ws"
-             name="PetsService">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://com.example.petstore/ws/pets"
+                  targetNamespace="http://com.example.petstore/ws/pets"
+                  name="PetsService">
 
-    <types>
-        <xsd:schema targetNamespace="http://com.generated.api/ws">
-            <xsd:import namespace="http://com.generated.api/ws" schemaLocation="schema.xsd"/>
-        </xsd:schema>
-    </types>
+    <wsdl:types><xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <!-- types defined in schema.xsd -->
+    </xs:schema></wsdl:types>
 
-    <message name="ListPetsRequest">
-        <part name="parameters" element="tns:ListPetsRequest"/>
-    </message>
-    <message name="ListPetsResponse">
-        <part name="parameters" element="tns:ListPetsResponse"/>
-    </message>
-    <message name="CreatePetRequest">
-        <part name="parameters" element="tns:CreatePetRequest"/>
-    </message>
-    <message name="CreatePetResponse">
-        <part name="parameters" element="tns:CreatePetResponse"/>
-    </message>
-    <message name="GetPetByIdRequest">
-        <part name="parameters" element="tns:GetPetByIdRequest"/>
-    </message>
-    <message name="GetPetByIdResponse">
-        <part name="parameters" element="tns:GetPetByIdResponse"/>
-    </message>
-    <message name="UpdatePetRequest">
-        <part name="parameters" element="tns:UpdatePetRequest"/>
-    </message>
-    <message name="UpdatePetResponse">
-        <part name="parameters" element="tns:UpdatePetResponse"/>
-    </message>
-    <message name="DeletePetRequest">
-        <part name="parameters" element="tns:DeletePetRequest"/>
-    </message>
-    <message name="DeletePetResponse">
-        <part name="parameters" element="tns:DeletePetResponse"/>
-    </message>
+    <wsdl:message name="ListPetsRequest">
+        <wsdl:part name="parameters" element="tns:ListPetsRequest"/>
+    </wsdl:message>
+    <wsdl:message name="ListPetsResponse">
+        <wsdl:part name="parameters" element="tns:ListPetsResponse"/>
+    </wsdl:message>
 
-    <portType name="PetsPort">
-        <operation name="listPets">
-            <input message="tns:ListPetsRequest"/>
-            <output message="tns:ListPetsResponse"/>
-        </operation>
-        <operation name="createPet">
-            <input message="tns:CreatePetRequest"/>
-            <output message="tns:CreatePetResponse"/>
-        </operation>
-        <operation name="getPetById">
-            <input message="tns:GetPetByIdRequest"/>
-            <output message="tns:GetPetByIdResponse"/>
-        </operation>
-        <operation name="updatePet">
-            <input message="tns:UpdatePetRequest"/>
-            <output message="tns:UpdatePetResponse"/>
-        </operation>
-        <operation name="deletePet">
-            <input message="tns:DeletePetRequest"/>
-            <output message="tns:DeletePetResponse"/>
-        </operation>
-    </portType>
+    <wsdl:message name="CreatePetRequest">
+        <wsdl:part name="parameters" element="tns:CreatePetRequest"/>
+    </wsdl:message>
+    <wsdl:message name="CreatePetResponse">
+        <wsdl:part name="parameters" element="tns:CreatePetResponse"/>
+    </wsdl:message>
 
-    <binding name="PetsPortBinding" type="tns:PetsPort">
+    <wsdl:message name="GetPetByIdRequest">
+        <wsdl:part name="parameters" element="tns:GetPetByIdRequest"/>
+    </wsdl:message>
+    <wsdl:message name="GetPetByIdResponse">
+        <wsdl:part name="parameters" element="tns:GetPetByIdResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="UpdatePetRequest">
+        <wsdl:part name="parameters" element="tns:UpdatePetRequest"/>
+    </wsdl:message>
+    <wsdl:message name="UpdatePetResponse">
+        <wsdl:part name="parameters" element="tns:UpdatePetResponse"/>
+    </wsdl:message>
+
+    <wsdl:message name="DeletePetRequest">
+        <wsdl:part name="parameters" element="tns:DeletePetRequest"/>
+    </wsdl:message>
+    <wsdl:message name="DeletePetResponse">
+        <wsdl:part name="parameters" element="tns:DeletePetResponse"/>
+    </wsdl:message>
+
+    <wsdl:portType name="PetsServicePort">
+        <wsdl:operation name="ListPets">
+            <wsdl:input message="tns:ListPetsRequest"/>
+            <wsdl:output message="tns:ListPetsResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePet">
+            <wsdl:input message="tns:CreatePetRequest"/>
+            <wsdl:output message="tns:CreatePetResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="GetPetById">
+            <wsdl:input message="tns:GetPetByIdRequest"/>
+            <wsdl:output message="tns:GetPetByIdResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="UpdatePet">
+            <wsdl:input message="tns:UpdatePetRequest"/>
+            <wsdl:output message="tns:UpdatePetResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="DeletePet">
+            <wsdl:input message="tns:DeletePetRequest"/>
+            <wsdl:output message="tns:DeletePetResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="PetsServiceBinding" type="tns:PetsServicePort">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <operation name="listPets">
-            <soap:operation soapAction="http://com.generated.api/ws/listPets"/>
-            <input><soap:body use="literal"/></input>
-            <output><soap:body use="literal"/></output>
-        </operation>
-        <operation name="createPet">
-            <soap:operation soapAction="http://com.generated.api/ws/createPet"/>
-            <input><soap:body use="literal"/></input>
-            <output><soap:body use="literal"/></output>
-        </operation>
-        <operation name="getPetById">
-            <soap:operation soapAction="http://com.generated.api/ws/getPetById"/>
-            <input><soap:body use="literal"/></input>
-            <output><soap:body use="literal"/></output>
-        </operation>
-        <operation name="updatePet">
-            <soap:operation soapAction="http://com.generated.api/ws/updatePet"/>
-            <input><soap:body use="literal"/></input>
-            <output><soap:body use="literal"/></output>
-        </operation>
-        <operation name="deletePet">
-            <soap:operation soapAction="http://com.generated.api/ws/deletePet"/>
-            <input><soap:body use="literal"/></input>
-            <output><soap:body use="literal"/></output>
-        </operation>
-    </binding>
+        <wsdl:operation name="ListPets">
+            <soap:operation soapAction="http://com.example.petstore/ws/pets/ListPets"/>
+            <wsdl:input><soap:body use="literal"/></wsdl:input>
+            <wsdl:output><soap:body use="literal"/></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="CreatePet">
+            <soap:operation soapAction="http://com.example.petstore/ws/pets/CreatePet"/>
+            <wsdl:input><soap:body use="literal"/></wsdl:input>
+            <wsdl:output><soap:body use="literal"/></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="GetPetById">
+            <soap:operation soapAction="http://com.example.petstore/ws/pets/GetPetById"/>
+            <wsdl:input><soap:body use="literal"/></wsdl:input>
+            <wsdl:output><soap:body use="literal"/></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="UpdatePet">
+            <soap:operation soapAction="http://com.example.petstore/ws/pets/UpdatePet"/>
+            <wsdl:input><soap:body use="literal"/></wsdl:input>
+            <wsdl:output><soap:body use="literal"/></wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="DeletePet">
+            <soap:operation soapAction="http://com.example.petstore/ws/pets/DeletePet"/>
+            <wsdl:input><soap:body use="literal"/></wsdl:input>
+            <wsdl:output><soap:body use="literal"/></wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
 
-    <service name="PetsService">
-        <port name="PetsPortPort" binding="tns:PetsPortBinding">
-            <soap:address location="http://localhost:8080/ws/pets"/>
-        </port>
-    </service>
+    <wsdl:service name="PetsService">
+        <wsdl:port name="PetsServicePort" binding="tns:PetsServiceBinding">
+            <soap:address location="http://localhost:8080/ws"/>
+        </wsdl:port>
+    </wsdl:service>
 
-</definitions>
+</wsdl:definitions>

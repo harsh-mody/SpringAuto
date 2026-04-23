@@ -12,6 +12,7 @@ com/springauto/model/OperationInfo.class
 com/springauto/model/OpenApiSpec.class
 com/springauto/generator/ProjectGenerator.class
 com/springauto/generator/CodeUtils.class
+com/springauto/generator/ServiceGenerator$OpPattern.class
 com/springauto/model/ResponseInfo.class
 com/springauto/generator/PomXmlGenerator.class
 com/springauto/model/PropertyInfo.class
